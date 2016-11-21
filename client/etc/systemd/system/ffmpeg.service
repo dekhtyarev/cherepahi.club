@@ -1,0 +1,10 @@
+[Unit]
+Description=FFMpeg
+
+[Service]
+Restart=always
+RestartSec=20s
+ExecStart=/usr/bin/ffmpeg -f video4linux2 -s 960x544 -r 10 -i /dev/video0 -f concat -safe 0 -i /opt/stream_audio/playlist.txt -c:v libvpx -deadline 1 http://10.8.0.1:8090/reptiles.ffm
+
+[Install]
+WantedBy=multi-user.target
